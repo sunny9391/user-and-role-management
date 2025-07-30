@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   loadActivities();
+  updateDynamicDate();
   applyPermissionsToUI(); 
 });
 
@@ -81,3 +82,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+function updateDynamicDate() {
+  const dateElement = document.querySelector('.sub-note'); 
+  if (dateElement) {
+    const now = new Date();
+    
+    const options = {
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long',   
+      day: 'numeric',  
+      hour: 'numeric', 
+      minute: 'numeric',
+      hour12: true,    
+      timeZoneName: 'short' 
+    };
+    const formattedDate = now.toLocaleString('en-US', options); 
+    dateElement.textContent = `Today is ${formattedDate}`;
+  }
+}
