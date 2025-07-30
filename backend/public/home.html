@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome Home - Admin Portal</title>
+    <link rel="stylesheet" href="./cssfiles/home.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="./jsfiles/permissionUtils.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main-content">
+            <header class="header">
+                <nav class="nav">
+                   <div class="logo">
+                                    <img src="./images/gradiouslogo.png" alt="My Application Logo" style="height: 45px; vertical-align: middle; border-radius: 50px;">
+</div>
+                    <a href="home.html" class="active">Home</a>
+                    <a href="roleslist.html" data-permission="role:read">Role manager</a>
+                    <a href="userlist.html" data-permission="user:read">Users</a>
+                    <a href="permissions.html" data-permission="permission:read">Permissions</a>
+                    <a href="admindashboard.html" data-permission="dashboard:view">Admin Dashboard</a>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </nav>
+                <!-- <div class="user-controls">
+                    <button class="circle-btn"><i class="fa fa-gear fa-spin"></i></button>
+                    <button class="circle-btn"><i class="fas fa-user-circle"></i></button>
+                </div> -->
+            </header>
+
+            <div class="home-greeting">
+                <div>
+                    <h1 id="welcomeUser">Welcome back, <span id="homeUserName">[[USERNAME]]</span>!</h1>
+                    <div class="sub-note">Today is Monday, July 21, 2025, 7:56 PM IST</div>
+                </div>
+                <div class="home-profile">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="homeRole">Admin</span>
+                </div>
+            </div>
+
+            <div id="contextSuggestion" class="sugg-card" style="display:none;">
+                <i class="fa fa-lightbulb"></i>
+                <span id="suggText">No users yet? <a href="userlist.html" class="btn-link" data-permission="user:create">Create your first user</a>.</span>
+            </div>
+
+            <div class="activity-feed-home" data-permission="activity:read">
+                <h2>Recent Activity</h2>
+                <ul class="activity-list" id="activityList">
+                    <li>No recent activity. You’re all caught up!</li>
+                </ul>
+            </div>
+
+            <section class="home-section help-section">
+                <h2>Getting Started</h2>
+                <ul class="onboarding-tips">
+                    <li><i class="fa fa-check-circle"></i> Review your <a href="roleslist.html" data-permission="role:read">roles</a> and set permissions
+                        before inviting more team members.</li>
+                    <li><i class="fa fa-check-circle"></i> Visit <a href="admindashboard.html" data-permission="dashboard:view">Admin Dashboard</a> to monitor key
+                        metrics.</li>
+                    <li><i class="fa fa-book"></i> Need a walkthrough? <a href="#">Read the Admin Quick Start Guide</a>.</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <script src="./jsfiles/home.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Permissions</title>
+    <link rel="stylesheet" href="./cssfiles/permissions.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="./jsfiles/permissionUtils.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <header class="header">
+                <nav class="nav">
+                    <div class="logo">
+                                    <img src="./images/gradiouslogo.png" alt="My Application Logo" style="height: 45px; vertical-align: middle; border-radius: 50px;">
+ </div>
+                    <a href="home.html">Home</a>
+                    <a href="roleslist.html" data-permission="role:read">Role manager</a>
+                    <a href="userlist.html" data-permission="user:read">Users</a>
+                    <a href="permissions.html" class="active">Permissions</a>
+                    <a href="admindashboard.html" data-permission="dashboard:view">Dashboard</a>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </nav>
+                <!-- <div class="user-controls">
+                    <button class="circle-btn"><i class="fa fa-gear fa-spin"></i></button>
+                    <button class="circle-btn"><i class="fas fa-user-circle"></i></button>
+                </div> -->
+            </header>
+            <h1 class="page-title">PERMISSIONS</h1>
+            <div class="search-newpermission">
+                <div class="search-box">
+                    <i class="fa fa-bars"></i>
+                    <input type="text" placeholder="Search permissions" id="permissionSearchInput" oninput="filterPermissions()" />
+                    <i class="fa fa-search"></i>
+                </div>
+                <button class="new-permission-btn" onclick="openAddPermissionModal()" data-permission="permission:create">+ New Permission</button>
+            </div>
+            <table class="permission-table">
+                <thead>
+                    <tr>
+                        <th>PERMISSION KEY</th>
+                        <th>DESCRIPTION</th>
+                        <th>ROLES ASSIGNED</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody id="permissionsTableBody">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="addPermissionModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalPermissionTitle">Add Permission</h2>
+                <span class="close-btn" onclick="closePermissionModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="permissionForm" onsubmit="submitPermissionForm(event)">
+                    <input type="hidden" id="permissionId" />
+                    <div class="form-group">
+                        <label for="permissionKey">Permission Key</label>
+                        <input type="text" id="permissionKey" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="permissionDescription">Description</label>
+                        <input type="text" id="permissionDescription" required />
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn-reset" data-permission="permission:create">Save</button>
+                        <button type="button" class="btn-delete" onclick="closePermissionModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="deletePermissionModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Delete Permission</h2>
+                <span class="close-btn" onclick="closeDeletePermissionModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the permission <strong id="deletePermissionName"></strong>?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-delete" onclick="closeDeletePermissionModal()">Cancel</button>
+                <button class="btn-reset" onclick="confirmDeletePermission()" data-permission="permission:delete">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="fullRolesModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="fullRolesTitle">Roles Assigned</h2>
+                <span class="close-btn" onclick="closeFullRolesModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <ul id="fullRolesList" style="padding-left: 20px; list-style-type: disc;"></ul>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-reset" onclick="closeFullRolesModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="./jsfiles/permissionUtils.js"></script> -->
+    <script src="./jsfiles/permissions.js"></script>
+</body>
+</html>

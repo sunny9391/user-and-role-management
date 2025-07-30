@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="./cssfiles/admindashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./jsfiles/permissionUtils.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="main-content">
+      <header class="header">
+        <nav class="nav">
+          <div class="logo">
+                                   <img src="./images/gradiouslogo.png" alt="My Application Logo" style="height: 45px; vertical-align: middle; border-radius: 50px;">
+ </div>
+          <a href="home.html">Home</a>
+          <a href="roleslist.html">Role manager</a>
+          <a href="userlist.html">Users</a>
+          <a href="permissions.html">Permissions</a>
+          <a href="admindashboard.html" class="active">Admin Dashboard</a>
+          <a href="#" id="logoutBtn">Logout</a>
+        </nav>
+        <!-- <div class="user-controls">
+          <button class="circle-btn" title="Settings"><i class="fa fa-gear fa-spin"></i></button>
+          <button class="circle-btn" title="Profile"><i class="fas fa-user-circle"></i></button>
+        </div> -->
+      </header>
+
+      <h1 class="page-title">ADMIN DASHBOARD</h1>
+
+      <div class="report-summary">
+        <div class="card" id="totalUsers">Total Users: --</div>
+        <div class="card" id="activeUsers">Active Users: --</div>
+        <div class="card" id="dailyActiveUsers">Daily Active: --</div>
+        <div class="card" id="systemUptime">System Uptime: --</div>
+        <div class="card" id="alertCount">Active Alerts: --</div>
+        <div class="card" id="rolesCount">Roles: --</div>
+        <div class="card" id="permissionsCount">Permissions: --</div>
+      </div>
+
+      <div class="charts">
+        <div>
+          <h3>User Registrations (Last 7 days)</h3>
+          <canvas id="registrationsChart"></canvas>
+        </div>
+        <div>
+          <h3>Users by Role</h3>
+          <canvas id="usersByRoleChart"></canvas>
+        </div>
+      </div>
+
+      <div class="dashboard-actions">
+        <button class="btn-reset"><i class="fa fa-user-plus"></i> Add User</button>
+        <button class="csv-btn"><i class="fa fa-download"></i> Download Data</button>
+      </div>
+
+
+      <div class="activity-feed" data-permission="activity:read">
+        <h3>Recent Activity</h3>
+        <ul class="activity-list" id="activityList">
+          <li>Loading recent activities...</li>
+        </ul>
+      </div>
+    
+
+    <h3 style="margin-top:34px;">Role-Permission Matrix</h3>
+    <div style="overflow-x:auto;">
+      <table class="role-permission-matrix" id="rolePermMatrix">
+        <thead>
+          <tr id="matrixHeader"></tr>
+        </thead>
+        <tbody id="matrixBody"></tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+  <script src="./jsfiles/admindashboard.js"></script>
+  
+
+</body>
+
+</html>

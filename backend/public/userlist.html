@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User List</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./cssfiles/userlist.css" />
+  <script src="./jsfiles/permissionUtils.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="main-content">
+      <header class="header">
+        <nav class="nav">
+          <div class="logo">
+            <img src="./images/gradiouslogo.png" alt="My Application Logo" style="height: 45px; vertical-align: middle; border-radius: 50px;">
+          </div>
+          <a href="home.html">Home</a>
+          <a href="roleslist.html" data-permission="role:read">Role manager</a> <a href="userlist.html" class="active"
+            data-permission="user:read">Users</a> <a href="permissions.html"
+            data-permission="permission:read">Permissions</a> <a href="admindashboard.html"
+            data-permission="dashboard:view">Dashboard</a> <a href="#" id="logoutBtn">Logout</a>
+        </nav>
+        <!-- <div class="user-controls">
+          <button class="circle-btn" title="Settings"><i class="fa fa-gear fa-spin"></i></button>
+          <div class="dropdown">
+            <div class="circle-btn position-relative" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user-circle"></i>
+              <span class="status-badge"></span>
+            </div>
+            <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="userMenu">
+              <li><a class="dropdown-item" href="#">My Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+          </div>
+        </div> -->
+      </header>
+      <h1 class="page-title">USER LIST</h1>
+      <div class="search-bar">
+        <input type="text" class="search-input" id="userSearchInput" placeholder="Search users" />
+        <button class="new-user-btn" onclick="openAddUserModal()" data-permission="user:create">+ New User</button>
+      </div>
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>USER</th>
+            <th>USERNAME</th>
+            <th>EMAIL ADDRESS</th>
+            <th>ROLE</th>
+            <th>STATUS</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody id="usertablerow"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="userProfileModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalName">User Name</h2>
+        <span class="modal-role" id="modalRole">Role</span>
+        <span class="close-btn" onclick="closeUserModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+        <p><strong>Phone:</strong> <span id="modalPhone"></span></p>
+        <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+        <p><strong>Created:</strong> <span id="modalCreated"></span></p>
+        <p><strong>Last Login:</strong> <span id="modalLogin"></span></p>
+      </div>
+    </div>
+  </div>
+  <div id="editUserModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Edit User</h2>
+        <span class="close-btn" onclick="closeEditModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="editUserForm" onsubmit="submitEditUser(event)">
+          <input type="hidden" id="editUserId" />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editUserName">Name</label>
+              <input type="text" id="editUserName" required />
+            </div>
+            <div class="form-group">
+              <label for="editUserEmail">Email</label>
+              <input type="email" id="editUserEmail" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editUserPhone">Phone</label>
+              <input type="text" id="editUserPhone" required />
+            </div>
+            <div class="form-group">
+              <label for="editUserRole">Role</label>
+              <select id="editUserRole" required>
+                <option value="Admin">Admin</option>
+                <option value="Viewer">Viewer</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"> <label for="editUserStatus">Status</label>
+            <select id="editUserStatus" required>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Suspended">Suspended</option>
+            </select>
+          </div>
+          <div class="modal-actions">
+            <button type="submit" class="btn-reset" data-permission="user:update">Update</button>
+            <button type="button" class="btn-delete" onclick="closeEditModal()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="deleteUserModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Delete User</h2>
+        <span class="close-btn" onclick="closeDeleteModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong id="deleteUserName"></strong>?</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-delete" onclick="closeDeleteModal()">Cancel</button>
+        <button class="btn-reset" onclick="confirmDeleteUser()" data-permission="user:delete">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+  <div id="addUserModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add New User</h2>
+        <span class="close-btn" onclick="closeAddUserModal()">&times;</span>
+      </div>
+      <form onsubmit="submitAddUser(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newUserName">Full Name</label>
+              <input type="text" id="newUserName" required />
+            </div>
+            <div class="form-group">
+              <label for="newUsername">Username</label>
+              <input type="text" id="newUsername" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newUserEmail">Email</label>
+              <input type="email" id="newUserEmail" required />
+            </div>
+            <div class="form-group">
+              <label for="newUserPassword">Password</label>
+              <input type="password" id="newUserPassword" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newUserPhone">Phone</label>
+              <input type="text" id="newUserPhone" required />
+            </div>
+            <div class="form-group">
+              <label for="newUserRole">Role</label>
+              <select id="newUserRole" required>
+                <option value="">Loading roles...</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"> <label for="newUserStatus">Status</label>
+            <select id="newUserStatus" required>
+              <option value="Online">Online</option>
+              <option value="Offline">Offline</option>
+              <option value="Active">Active</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn-reset" data-permission="user:create">Create</button>
+          <button type="button" class="btn-delete" onclick="closeAddUserModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="./jsfiles/userlist.js"></script>
+</body>
+
+</html>

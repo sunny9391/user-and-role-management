@@ -1,0 +1,32 @@
+#onboardingChart {
+  height: 250px !important;
+}
+#roleassign{
+    height: 366px;
+}
+.rounded-15{
+       padding-left: 21px;
+    border-radius: 25px;
+    width: 219px;
+    font-weight: 400;
+    height: 35px;
+
+}
+.access{
+    margin-top: 50px;
+    height: 185px;
+    text-align: center;
+}
+.access-inside{
+    height: 100px;
+}
+.custom-bg{
+    background-color:#e7e7e7;
+}
+.nav a.active {
+      border-radius: 4px;
+    padding: 5px;
+    background-color: black;
+    font-weight: bold;
+    color: #ffffff;
+}
