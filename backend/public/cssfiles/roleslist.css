@@ -432,12 +432,11 @@ body {
   }
 }
 
-/* public/cssfiles/roleslist.css */
 
 .permissions-checkbox-group {
     border: 1px solid #ccc;
     padding: 10px;
-    max-height: 150px; /* Adjust as needed */
+    max-height: 150px; 
     overflow-y: auto;
     background-color: #f9f9f9;
     border-radius: 4px;
@@ -451,13 +450,13 @@ body {
 
 .permissions-checkbox-group input[type="checkbox"] {
     margin-right: 8px;
-    transform: scale(1.1); /* Slightly larger checkboxes */
+    transform: scale(1.1); 
 }
 
 .permissions-checkbox-group label {
-    font-weight: normal; /* Override bold if labels are bold by default */
+    font-weight: normal; 
     cursor: pointer;
-    flex-grow: 1; /* Allow label to take available space */
+    flex-grow: 1; 
 }
 .nav a.active, .nav a:hover {
   background-color: #2884ff;
