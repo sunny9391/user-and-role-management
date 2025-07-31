@@ -209,7 +209,7 @@ function renderUserTable(filteredUsers = users) {
     <td>${user.email || ""}</td>
     <td>${user.role || ""}</td>
     <td>
-      <span class="status-dot ${user.status === 'Online' ? 'status-online' : 'status-offline'}"></span>
+      <span class="status-dot ${user.status === 'Active' ? 'status-online' : 'status-offline'}"></span>
       ${user.status || ""}
     </td>
     <td class="actions">
