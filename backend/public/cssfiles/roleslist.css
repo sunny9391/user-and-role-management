@@ -171,9 +171,9 @@ body {
   border-spacing: 0;
   border-collapse: separate;
   margin-top: 0;
-  background: #fff;
+  /* background: #fff; */
   border-radius: 16px;
-  box-shadow: 0 2px 16px 0 rgba(36, 48, 82, 0.06);
+  /* box-shadow: 0 2px 16px 0 rgba(36, 48, 82, 0.06); */
   font-size: 15px;
   overflow: hidden;
 }
@@ -463,11 +463,50 @@ body {
   color: #fff !important;
 }
 .actions i  {
-  /* background: #e8f3ff; */
   color: #2884ff;
-  /* box-shadow: 0 0 0 2px #e8f3ff; */
   
 }
 .fa-trash:before {
   color: red;
+}
+
+.role-table {
+  border-collapse: separate; 
+  border-spacing: 0 10px;    
+}
+
+.role-table th,
+.role-table td {
+  border: none; 
+}
+
+.role-table tbody tr {
+  background: #fff; 
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(36, 48, 82, 0.05); 
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; 
+}
+
+.role-table tbody tr:hover {
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 20px rgba(36, 48, 82, 0.15); 
+}
+
+.role-table th,
+.role-table td {
+  padding: 18px 14px;
+}
+
+.role-table thead tr:first-child th:first-child {
+  border-top-left-radius: 16px; 
+}
+.role-table thead tr:first-child th:last-child {
+  border-top-right-radius: 16px; 
+}
+.role-table tbody tr:last-child {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+.role-table th{
+  color:#006dff;
 }

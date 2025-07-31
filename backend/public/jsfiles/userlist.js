@@ -203,18 +203,21 @@ function renderUserTable(filteredUsers = users) {
     row.classList.add('clickable-row');
     row.onclick = () => openUserModal(user);
     row.innerHTML = `
-      <td>${user.userId || ''}</td>
-      <td>${user.name || ""}</td>
-      <td>${user.username || ""}</td>
-      <td>${user.email || ""}</td>
-      <td>${user.role || ""}</td>
-      <td>${user.status || ""}</td>
-      <td class="actions">
-        <i class="fas fa-pen-to-square text-primary" title="Edit" onclick="event.stopPropagation(); editUser('${user._id}')" data-permission="user:update"></i>
-        <i class="fas fa-trash text-danger" style="color:red" title="Delete" onclick="event.stopPropagation(); openDeleteModal('${user._id}')" data-permission="user:delete"></i>
-      </td>
-    `;
-    tbody.appendChild(row);
+    <td>${user.userId || ''}</td>
+    <td>${user.name || ""}</td>
+    <td>${user.username || ""}</td>
+    <td>${user.email || ""}</td>
+    <td>${user.role || ""}</td>
+    <td>
+      <span class="status-dot ${user.status === 'Online' ? 'status-online' : 'status-offline'}"></span>
+      ${user.status || ""}
+    </td>
+    <td class="actions">
+      <i class="fas fa-pen-to-square text-primary" title="Edit" onclick="event.stopPropagation(); editUser('${user._id}')" data-permission="user:update"></i>
+      <i class="fas fa-trash text-danger" style="color:red" title="Delete" onclick="event.stopPropagation(); openDeleteModal('${user._id}')" data-permission="user:delete"></i>
+    </td>
+`;
+tbody.appendChild(row);
   });
   applyPermissionsToUI();
 }

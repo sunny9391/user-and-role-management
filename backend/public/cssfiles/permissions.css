@@ -184,9 +184,9 @@ html, body {
   border-spacing: 0;
   border-collapse: separate;
   margin-top: 0;
-  background: #fff;
+  /* background: #fff; */
   border-radius: 16px;
-  box-shadow: 0 2px 16px 0 rgba(36,48,82,0.06);
+  /* box-shadow: 0 2px 16px 0 rgba(36,48,82,0.06); */
   font-size: 15px;
   overflow: hidden;
 }
@@ -426,4 +426,46 @@ html, body {
   .modal-content {
     padding: 16px 7px;
   }
+}
+
+
+.permission-table {
+  border-collapse: separate; 
+  border-spacing: 0 10px;   
+}
+
+.permission-table th,
+.permission-table td {
+  border: none;
+}
+
+.permission-table tbody tr {
+  background: #fff; 
+  border-radius: 10px; 
+  box-shadow: 0 2px 8px rgba(36, 48, 82, 0.05); 
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; 
+}
+
+.permission-table tbody tr:hover {
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 20px rgba(36, 48, 82, 0.15); 
+}
+
+.permission-table th,
+.permission-table td {
+  padding: 18px 14px; 
+}
+
+.permission-table thead tr:first-child th:first-child {
+  border-top-left-radius: 16px;
+}
+.permission-table thead tr:first-child th:last-child {
+  border-top-right-radius: 16px; 
+}
+.permission-table tbody tr:last-child {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+.permission-table th{
+  color:#006dff;
 }
